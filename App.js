@@ -20,6 +20,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      {/* Added this scroll view to enable scrolling when list gets longer than the page */}
       <ScrollView
         contentContainerStyle={{
           flexGrow: 1
@@ -27,9 +28,11 @@ export default function App() {
         keyboardShouldPersistTaps='handled'
       >
 
+      {/* Today's Tasks */}
       <View style={styles.tasksWrapper}>
-        <Text style={styles.sectionTitle}>Synced Texts</Text>
+        <Text style={styles.sectionTitle}>Today's tasks</Text>
         <View style={styles.items}>
+          {/* This is where the tasks will go! */}
           {
             taskItems.map((item, index) => {
               return (
@@ -44,13 +47,16 @@ export default function App() {
         
       </ScrollView>
 
+      {/* Write a task */}
+      {/* Uses a keyboard avoiding view which ensures the keyboard does not cover the items on screen */}
       <KeyboardAvoidingView 
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.writeTaskWrapper}
       >
+        <TextInput style={styles.input} placeholder={'Write a task'} value={task} onChangeText={text => setTask(text)} />
         <TouchableOpacity onPress={() => handleAddTask()}>
           <View style={styles.addWrapper}>
-            <Text style={styles.addText}>Sync</Text>
+            <Text style={styles.addText}>+</Text>
           </View>
         </TouchableOpacity>
       </KeyboardAvoidingView>
